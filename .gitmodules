@@ -1,3 +1,3 @@
 [submodule "FLAME_PyTorch"]
 	path = FLAME_PyTorch
-	url = https://github.com/soubhiksanyal/FLAME_PyTorch.git
+	url = https://github.com/unclearness/FLAME_PyTorch.git

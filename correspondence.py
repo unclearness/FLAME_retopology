@@ -194,13 +194,13 @@ if __name__ == '__main__':
         if corresp[i] is not None:
             wrap3_compat[name] = corresp[i][:3]
 
-    with open('wrap3_named_points_on_triangle.json', 'w') as fp:
+    with open('./data/corresp_wrap3_named_points_on_triangle.json', 'w') as fp:
         json.dump(wrap3_compat, fp)
 
-    with open('corresp.json', 'w') as fp:
+    with open('./data/corresp_all_info.json', 'w') as fp:
         json.dump(corresp, fp)
 
-    with open('src_corresp_line.obj', 'w') as fp:
+    with open('./data/src_corresp_line.obj', 'w') as fp:
         recomputed_points = []
         skipped = set()
         for i, c in enumerate(corresp):
