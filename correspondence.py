@@ -18,8 +18,13 @@ def calcBarycentric(p, a, b, c):
     d21 = my_dot(v2, v1)
     denom = d00 * d11 - d01 * d01
 
-    # TODO: avoid zero div
+    # denom is 0; b is c, and the triangle is squashed
+    # Set valid but no meaning value; u, v, w = 0, 0, 1
+    zero_mask = np.abs(denom) < 1e-20
+    denom[zero_mask] = 1.0  # Avoid zero div
     inv_denom = 1.0 / denom
+    inv_denom[zero_mask] = 0.0
+
     v = (d11 * d20 - d01 * d21) * inv_denom
     w = (d00 * d21 - d01 * d20) * inv_denom
     u = 1.0 - v - w
@@ -46,7 +51,7 @@ def point_line_distance(p, v0, v1):
     delta_p = p_proj - p
     result = np.sqrt(my_dot(delta_p, delta_p))
     if np.sum(invalid_mask) > 0:
-        result[invalid_mask] = my_dot(p - v1, p - v1)[invalid_mask]
+        result[invalid_mask] = np.sqrt(my_dot(p - v1, p - v1)[invalid_mask])
     return result, p_proj
 
 
